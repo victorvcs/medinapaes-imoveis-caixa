@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Medina Paes Imóveis | Oportunidades CEF</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#F0F4FB;color:#1B2E5E;-webkit-font-smoothing:antialiased}
+a{text-decoration:none;color:inherit}
+img{display:block;max-width:100%}
+:root{
+  --azul:#1B2E5E;--royal:#1E4DB7;--ouro:#F5A800;--ouro-d:#c98900;
+  --fundo:#F0F4FB;--branco:#fff;--suave:#5a6a8a;--borda:#dce4f2;
+  --sombra:0 2px 16px rgba(27,46,94,.09);--sh2:0 8px 36px rgba(27,46,94,.18);
+  --r:14px;--verde:#16a34a;--vbg:#f0fdf4;--am:#b45309;--amb:#fffbeb;--wpp:#25D366;
+}
+
+/* ── FLOAT WPP ── */
+.float-wpp{
+  position:fixed;bottom:24px;right:24px;z-index:300;
+  display:flex;align-items:center;gap:10px;
+  background:var(--wpp);color:#fff;
+  font-weight:800;font-size:14px;
+  padding:13px 22px 13px 16px;
+  border-radius:50px;border:none;cursor:pointer;
+  box-shadow:0 6px 24px rgba(37,211,102,.45);
+  transition:all .22s;
+  text-decoration:none;
+}
+.float-wpp:hover{background:#1ebe57;transform:translateY(-3px) scale(1.03);box-shadow:0 10px 32px rgba(37,211,102,.55)}
+.float-wpp svg{width:22px;height:22px;flex-shrink:0}
+.float-wpp span{white-space:nowrap}
+@media(max-width:480px){
+  .float-wpp{padding:13px 16px;border-radius:50%;width:54px;height:54px;justify-content:center}
+  .float-wpp span{display:none}
+}
+
+/* ── HEADER ── */
+header{background:var(--branco);border-bottom:1px solid var(--borda);position:sticky;top:0;z-index:200;box-shadow:0 2px 12px rgba(27,46,94,.07)}
+.hdr{max-width:1280px;margin:0 auto;padding:0 24px;height:64px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.hdr-logo img{height:44px;width:auto;object-fit:contain}
+.hdr-r{display:flex;align-items:center;gap:10px}
+.live-pill{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--suave);padding:5px 12px;background:var(--fundo);border-radius:8px;border:1px solid var(--borda)}
+.live-pill strong{color:var(--azul)}
+.dot{width:7px;height:7px;background:#22c55e;border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.btn-wpp{display:flex;align-items:center;gap:7px;background:var(--wpp);color:#fff;font-weight:700;font-size:13px;padding:9px 18px;border-radius:50px;border:none;cursor:pointer;transition:all .2s;white-space:nowrap;box-shadow:0 3px 12px rgba(37,211,102,.3)}
+.btn-wpp:hover{background:#1ebe57;transform:translateY(-1px)}
+.btn-wpp svg{width:17px;height:17px}
+.wl{display:inline}
+
+/* ── PAINEL MERCADO ── */
+.mercado-bar{background:linear-gradient(135deg,var(--azul),var(--royal));padding:20px 24px;border-bottom:3px solid var(--ouro)}
+.mercado-inner{max-width:1280px;margin:0 auto}
+.mercado-title{font-size:11px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.mercado-title::after{content:'';flex:1;height:1px;background:rgba(255,255,255,.15)}
+.mercado-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:12px}
+.m-card{background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.14);border-radius:10px;padding:12px 14px;transition:background .2s}
+.m-card:hover{background:rgba(255,255,255,.14)}
+.m-label{font-size:10px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:4px}
+.m-val{font-size:17px;font-weight:900;color:var(--ouro);line-height:1;margin-bottom:3px}
+.m-sub{font-size:11px;color:rgba(255,255,255,.65)}
+
+/* projetos futuros */
+.projetos-bar{background:rgba(0,0,0,.18);border-top:1px solid rgba(255,255,255,.1)}
+.projetos-inner{max-width:1280px;margin:0 auto;padding:10px 24px;display:flex;align-items:center;gap:8px;overflow-x:auto}
+.proj-label{font-size:11px;font-weight:700;color:var(--ouro);white-space:nowrap;letter-spacing:.5px}
+.proj-pill{display:inline-flex;align-items:center;gap:5px;background:rgba(245,168,0,.18);border:1px solid rgba(245,168,0,.3);border-radius:50px;padding:4px 11px;font-size:11px;font-weight:600;color:rgba(255,255,255,.85);white-space:nowrap;cursor:pointer;transition:all .2s;flex-shrink:0}
+.proj-pill:hover{background:rgba(245,168,0,.3)}
+.proj-pill svg{width:11px;height:11px;fill:var(--ouro)}
+
+/* ── FILTROS ── */
+.filterbar{background:var(--branco);border-bottom:1px solid var(--borda);padding:12px 24px}
+.fb-inner{max-width:1280px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.fb-left{display:flex;align-items:center;gap:8px}
+.fb-title{font-size:15px;font-weight:800;color:var(--azul)}
+.fb-count{font-size:12px;color:var(--suave);background:var(--fundo);padding:3px 10px;border-radius:50px;border:1px solid var(--borda)}
+.pills{display:flex;gap:7px;flex-wrap:wrap}
+.pill{font-size:11px;font-weight:700;padding:5px 13px;border-radius:50px;border:1px solid var(--borda);background:var(--fundo);color:var(--suave);cursor:pointer;transition:all .15s}
+.pill.on,.pill:hover{background:var(--azul);color:#fff;border-color:var(--azul)}
+.pill-ouro{background:rgba(245,168,0,.1);color:var(--ouro-d);border-color:rgba(245,168,0,.3)}
+.pill-ouro.on,.pill-ouro:hover{background:var(--ouro);color:var(--azul);border-color:var(--ouro)}
+
+/* ── GRID ── */
+.main{max-width:1280px;margin:0 auto;padding:28px 24px 60px}
+.cidade-sep{display:flex;align-items:center;gap:12px;margin:0 0 20px}
+.csep-line{flex:1;height:1px;background:var(--borda)}
+.csep-txt{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;color:var(--azul);white-space:nowrap}
+.csep-txt svg{width:13px;height:13px;fill:var(--ouro)}
+.sec2{margin-top:48px}
+.cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:22px}
+
+/* ── CARD ── */
+.card{background:var(--branco);border-radius:var(--r);border:1px solid var(--borda);box-shadow:var(--sombra);overflow:hidden;display:flex;flex-direction:column;cursor:pointer;transition:all .22s}
+.card:hover{box-shadow:var(--sh2);transform:translateY(-4px);border-color:rgba(30,77,183,.2)}
+.card-img{position:relative;overflow:hidden;height:205px;background:linear-gradient(135deg,#d0dcf0,#b8cceb);flex-shrink:0}
+.card-img img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
+.card:hover .card-img img{transform:scale(1.06)}
+.sk{position:absolute;inset:0;background:linear-gradient(90deg,#d8e2f0 25%,#e8eef8 50%,#d8e2f0 75%);background-size:200% 100%;animation:shim 1.4s infinite}
+@keyframes shim{0%{background-position:200% 0}100%{background-position:-200% 0}}
+.b-risco{position:absolute;top:10px;left:10px;font-size:11px;font-weight:800;padding:4px 10px;border-radius:50px;backdrop-filter:blur(6px);border:1px solid}
+.b-baixo{background:rgba(240,253,244,.92);color:#15803d;border-color:#bbf7d0}
+.b-medio{background:rgba(255,251,235,.92);color:#92400e;border-color:#fde68a}
+.b-alto{background:rgba(254,242,242,.92);color:#b91c1c;border-color:#fecaca}
+.b-desc{position:absolute;top:10px;right:10px;background:var(--ouro);color:var(--azul);font-size:13px;font-weight:900;padding:5px 11px;border-radius:50px;box-shadow:0 2px 8px rgba(0,0,0,.16)}
+.no-ph{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:#8fa3c8;font-size:12px}
+.no-ph svg{width:30px;height:30px;fill:#a8bcd8}
+.card-body{padding:16px 16px 12px;flex:1;display:flex;flex-direction:column;gap:9px}
+.card-loc{display:flex;align-items:center;gap:4px;font-size:11px;color:var(--suave);font-weight:600;text-transform:uppercase;letter-spacing:.4px}
+.card-loc svg{width:11px;height:11px;fill:var(--ouro)}
+.card-title{font-size:15px;font-weight:800;color:var(--azul);line-height:1.25}
+.card-cod{font-size:10px;color:#9ab0cc;font-weight:600;margin-top:-3px}
+.card-prices{display:flex;align-items:flex-end;gap:10px;flex-wrap:wrap;padding:9px 11px;background:var(--fundo);border-radius:10px;border:1px solid var(--borda)}
+.price-c .lbl,.price-m .lbl,.price-l .lbl{font-size:10px;color:var(--suave);font-weight:600;text-transform:uppercase;letter-spacing:.4px;margin-bottom:1px}
+.price-c .val{font-size:17px;font-weight:900;color:var(--azul)}
+.price-m .val{font-size:12px;font-weight:700;color:var(--suave);text-decoration:line-through}
+.price-l{margin-left:auto;text-align:right}
+.price-l .lbl{color:var(--verde)}
+.price-l .val{font-size:15px;font-weight:900;color:var(--verde)}
+.roi-pill{display:inline-flex;align-items:center;gap:5px;background:rgba(245,168,0,.1);border:1px solid rgba(245,168,0,.28);color:var(--ouro-d);font-size:12px;font-weight:800;padding:4px 10px;border-radius:50px;align-self:flex-start}
+.roi-pill svg{width:12px;height:12px;fill:var(--ouro-d)}
+.card-texto{font-size:12px;color:var(--suave);line-height:1.6;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.card-footer{padding:11px 16px 13px;border-top:1px solid var(--borda);display:flex;gap:8px}
+.btn-sm{flex:1;display:flex;align-items:center;justify-content:center;gap:5px;font-size:12px;font-weight:700;padding:8px 10px;border-radius:50px;border:none;cursor:pointer;transition:all .18s}
+.btn-sm svg{width:13px;height:13px;flex-shrink:0}
+.btn-ver{background:var(--fundo);color:var(--royal);border:1.5px solid var(--royal)}
+.btn-ver:hover{background:var(--royal);color:#fff}
+.btn-int{background:var(--azul);color:#fff}
+.btn-int:hover{background:var(--royal)}
+.btn-det{background:transparent;color:var(--suave);border:1.5px solid var(--borda);font-size:11px;padding:7px 10px}
+.btn-det:hover{background:var(--fundo);color:var(--azul)}
+
+/* ── MODAL ── */
+.overlay{position:fixed;inset:0;background:rgba(10,20,50,.7);z-index:500;display:flex;align-items:flex-start;justify-content:center;padding:20px;backdrop-filter:blur(4px);overflow-y:auto}
+.overlay.hidden{display:none}
+.modal{background:var(--branco);border-radius:20px;max-width:780px;width:100%;margin:auto;overflow:hidden;box-shadow:0 24px 80px rgba(10,20,50,.35);animation:fadeUp .25s ease}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.modal-hero{position:relative;height:280px;background:linear-gradient(135deg,#d0dcf0,#b8cceb);overflow:hidden}
+.modal-hero img{width:100%;height:100%;object-fit:cover}
+.modal-close{position:absolute;top:14px;right:14px;width:36px;height:36px;background:rgba(255,255,255,.9);border:none;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:18px;color:var(--azul);font-weight:700;transition:all .15s;z-index:10}
+.modal-close:hover{background:#fff;transform:scale(1.1)}
+.modal-body{padding:26px 28px 28px}
+.modal-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+.modal-tipo{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--royal)}
+.modal-h1{font-size:20px;font-weight:900;color:var(--azul);margin-top:3px}
+.modal-cod{font-size:11px;color:#9ab0cc;font-weight:600;margin-top:2px}
+.modal-prices{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:18px}
+.mprice{background:var(--fundo);border:1px solid var(--borda);border-radius:10px;padding:11px 14px}
+.mprice .lbl{font-size:10px;color:var(--suave);font-weight:600;text-transform:uppercase;letter-spacing:.4px;margin-bottom:3px}
+.mprice .val{font-size:18px;font-weight:900;color:var(--azul)}
+.mprice.verde .val{color:var(--verde)}
+.mprice.ouro .val{color:var(--ouro-d)}
+
+/* tabs */
+.modal-tabs{display:flex;gap:4px;border-bottom:1px solid var(--borda);margin-bottom:18px}
+.tab{padding:8px 14px;font-size:13px;font-weight:700;color:var(--suave);cursor:pointer;border-bottom:2px solid transparent;transition:all .15s;background:none;border-top:none;border-left:none;border-right:none}
+.tab.on{color:var(--azul);border-bottom-color:var(--azul)}
+.tab-pane{display:none}
+.tab-pane.on{display:block}
+
+/* inteligência de mercado no modal */
+.stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
+.stat{background:var(--fundo);border:1px solid var(--borda);border-radius:10px;padding:12px 13px}
+.stat .lbl{font-size:10px;color:var(--suave);font-weight:600;text-transform:uppercase;letter-spacing:.4px;margin-bottom:3px}
+.stat .val{font-size:16px;font-weight:900;color:var(--azul)}
+.stat .sub{font-size:11px;color:var(--verde);font-weight:600;margin-top:2px}
+.stat.ouro .val{color:var(--ouro-d)}
+
+/* info chips */
+.chips{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:14px}
+.chip{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:600;padding:5px 11px;border-radius:50px;background:rgba(27,46,94,.06);color:var(--azul);border:1px solid var(--borda)}
+.chip svg{width:12px;height:12px;fill:var(--ouro)}
+
+/* projetos futuros no modal */
+.projeto-item{display:flex;align-items:flex-start;gap:10px;padding:11px 12px;background:rgba(245,168,0,.07);border:1px solid rgba(245,168,0,.22);border-radius:10px;margin-bottom:8px}
+.proj-icon{width:34px;height:34px;background:var(--ouro);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.proj-icon svg{width:18px;height:18px;fill:var(--azul)}
+.proj-txt .title{font-size:13px;font-weight:800;color:var(--azul)}
+.proj-txt .desc{font-size:12px;color:var(--suave);margin-top:2px;line-height:1.5}
+.proj-txt a{color:var(--royal);font-weight:700;font-size:11px}
+
+/* texto estratégico */
+.texto-box{font-size:13px;color:var(--suave);line-height:1.68;padding:13px 15px;background:rgba(27,46,94,.04);border-left:3px solid var(--royal);border-radius:0 8px 8px 0;margin-bottom:14px}
+
+/* maps link */
+.maps-btn{display:inline-flex;align-items:center;gap:7px;background:var(--fundo);border:1.5px solid var(--borda);color:var(--azul);font-weight:700;font-size:13px;padding:9px 16px;border-radius:50px;transition:all .2s;margin-bottom:14px}
+.maps-btn:hover{background:var(--azul);color:#fff;border-color:var(--azul)}
+.maps-btn svg{width:15px;height:15px;fill:currentColor}
+
+/* modal footer */
+.modal-footer{display:flex;gap:10px;flex-wrap:wrap;padding-top:14px;border-top:1px solid var(--borda)}
+.mf-btn{flex:1;display:flex;align-items:center;justify-content:center;gap:7px;font-size:13px;font-weight:700;padding:12px 16px;border-radius:50px;border:none;cursor:pointer;transition:all .2s}
+.mf-btn svg{width:15px;height:15px}
+.mf-ver{background:var(--fundo);color:var(--royal);border:1.5px solid var(--royal)}
+.mf-ver:hover{background:var(--royal);color:#fff}
+.mf-int{background:var(--azul);color:#fff}
+.mf-int:hover{background:var(--royal)}
+
+/* ── FOOTER ── */
+footer{background:var(--azul);color:rgba(255,255,255,.6);padding:36px 24px;text-align:center;border-top:3px solid var(--ouro)}
+footer img{height:36px;width:auto;margin:0 auto 10px}
+.fav{font-size:11px;line-height:1.72;max-width:680px;margin:14px auto 0;padding-top:14px;border-top:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.38)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:860px){
+  .mercado-grid{grid-template-columns:repeat(3,1fr)}
+  .cards-grid{grid-template-columns:repeat(2,1fr);gap:16px}
+  .live-pill{display:none}
+  .stats-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:560px){
+  .hdr{height:58px;padding:0 14px}
+  .hdr-logo img{height:36px}
+  .wl{display:none}
+  .btn-wpp{padding:9px 12px}
+  .mercado-grid{grid-template-columns:repeat(2,1fr)}
+  .projetos-inner{padding:8px 14px}
+  .filterbar{padding:10px 14px}
+  .main{padding:18px 14px 48px}
+  .cards-grid{grid-template-columns:1fr;gap:14px}
+  .modal-body{padding:18px 16px 20px}
+  .modal-hero{height:220px}
+  .stats-grid{grid-template-columns:1fr 1fr}
+  .modal-prices{flex-direction:column;gap:8px}
+}
+</style>
+</head>
+<body>
+
+<!-- FLOAT WHATSAPP -->
+<a href="https://wa.me/5521986517152?text=Olá!%20Vi%20as%20oportunidades%20no%20site%20da%20Medina%20Paes%20Imóveis%20e%20gostaria%20de%20saber%20mais%20sobre%20os%20imóveis%20da%20Caixa%20disponíveis." target="_blank" class="float-wpp">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  <span>Falar com especialista</span>
+</a>
+
+<!-- HEADER -->
+<header>
+  <div class="hdr">
+    <div class="hdr-logo">
+      <img src="logo.png" alt="Medina Paes Imóveis"
+        onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 220 60%22><rect width=%22220%22 height=%2260%22 rx=%228%22 fill=%22%231B2E5E%22/><text x=%2212%22 y=%2224%22 font-family=%22Arial Black,sans-serif%22 font-weight=%22900%22 font-size=%2219%22 fill=%22%231E4DB7%22>M</text><text x=%2228%22 y=%2224%22 font-family=%22Arial Black,sans-serif%22 font-weight=%22900%22 font-size=%2219%22 fill=%22%23F5A800%22>P</text><text x=%2212%22 y=%2242%22 font-family=%22Arial,sans-serif%22 font-weight=%22800%22 font-size=%2213%22 fill=%22white%22>MEDINA PAES</text><text x=%2212%22 y=%2256%22 font-family=%22Arial,sans-serif%22 font-weight=%22500%22 font-size=%228%22 letter-spacing=%222%22 fill=%22%23F5A800%22>IMÓVEIS</text></svg>';">
+    </div>
+    <div class="hdr-r">
+      <div class="live-pill"><span class="dot"></span><span>Atualizado <strong>23/05</strong> · <strong>17</strong> imóveis</span></div>
+              <a href="https://wa.me/5521986517152?text=Olá!%20Vi%20as%20oportunidades%20no%20site%20da%20Medina%20Paes%20e%20gostaria%20de%20mais%20informações." target="_blank" class="btn-wpp">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        <span class="wl">Falar no WhatsApp</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<!-- PAINEL INTELIGÊNCIA DE MERCADO -->
+<div class="mercado-bar">
+  <div class="mercado-inner">
+    <div class="mercado-title">
+      <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13" style="fill:rgba(245,168,0,.7)"><path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z"/></svg>
+      Inteligência de Mercado — Niterói &amp; São Gonçalo · Fonte: FipeZAP / Secovi-Rio / DataZAP 2025
+    </div>
+    <div class="mercado-grid">
+      <div class="m-card">
+        <div class="m-label">m² Niterói (venda)</div>
+        <div class="m-val">R$ 7.730</div>
+        <div class="m-sub">↑ 6,99% em 12 meses</div>
+      </div>
+      <div class="m-card">
+        <div class="m-label">Aluguel m² Niterói</div>
+        <div class="m-val">R$ 34/m²</div>
+        <div class="m-sub">Icaraí: R$ 33,62/m²</div>
+      </div>
+      <div class="m-card">
+        <div class="m-label">Valorização bairros</div>
+        <div class="m-val">+8,3%</div>
+        <div class="m-sub">São Lourenço lidera (12 m.)</div>
+      </div>
+      <div class="m-card">
+        <div class="m-label">m² São Gonçalo (venda)</div>
+        <div class="m-val">~R$ 3.200</div>
+        <div class="m-sub">↑ demanda crescente 2025</div>
+      </div>
+      <div class="m-card">
+        <div class="m-label">Aluguel São Gonçalo</div>
+        <div class="m-val">R$ 22/m²</div>
+        <div class="m-sub">Média DataZAP Centro 2025</div>
+      </div>
+      <div class="m-card">
+        <div class="m-label">Aluguel médio SG</div>
+        <div class="m-val">R$ 1.100</div>
+        <div class="m-sub">Aptos · QuintoAndar 2025</div>
+      </div>
+    </div>
+    <!-- projetos futuros ticker -->
+    <div class="projetos-bar" style="margin:12px -24px -20px;padding:0">
+      <div class="projetos-inner">
+        <span class="proj-label">🚀 PROJETOS:</span>
+        <a href="https://niteroi.rj.gov.br/prefeito-e-ministro-da-fazenda-anunciam-financiamento-para-o-primeiro-vlt-de-niteroi/" target="_blank" class="proj-pill">
+          <svg viewBox="0 0 24 24"><path d="M4 16c0 .88.39 1.67 1 2.22V20a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1h8v1a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1.78c.61-.55 1-1.34 1-2.22V6c0-3.5-3.58-4-8-4s-8 .5-8 4v10zm3.5 1a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm9 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zM4 11V9h16v2H4z"/></svg>
+          VLT Niterói — R$ 450M PAC (obras 2026)
+        </a>
+        <a href="https://prefeitura.rio/cidade/prefeitura-participa-da-apresentacao-do-novo-projeto-de-expansao-metroviario/" target="_blank" class="proj-pill">
+          <svg viewBox="0 0 24 24"><path d="M4 16c0 .88.39 1.67 1 2.22V20a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1h8v1a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1.78c.61-.55 1-1.34 1-2.22V6c0-3.5-3.58-4-8-4s-8 .5-8 4v10zm3.5 1a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm9 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zM4 11V9h16v2H4z"/></svg>
+          Linha 3 Metrô: Praça XV → São Gonçalo (R$ 28,8B)
+        </a>
+        <a href="https://niteroi.rj.gov.br/niteroi-lanca-plano-estrategico-ate-2050-com-foco-em-inovacao-inclusao-social-e-qualidade-de-vida/" target="_blank" class="proj-pill">
+          <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>
+          Plano Niterói 2050 — Revitalização Centro + Ciclovias
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FILTROS -->
+<div class="filterbar">
+  <div class="fb-inner">
+    <div class="fb-left">
+      <span class="fb-title">Oportunidades CEF</span>
+      <span class="fb-count" id="fc">17 imóveis</span>
+    </div>
+    <div class="pills">
+      <button class="pill on"   onclick="fil('todos',this)">Todos</button>
+      <button class="pill"      onclick="fil('niteroi',this)">Niterói</button>
+      <button class="pill"      onclick="fil('saogoncalo',this)">São Gonçalo</button>
+      <button class="pill pill-ouro" onclick="fil('baixo',this)">🟢 Baixo Risco</button>
+    </div>
+  </div>
+</div>
+
+<!-- GRID -->
+<main class="main">
+  <div id="sec-n">
+    <div class="cidade-sep">
+      <div class="csep-line"></div>
+      <div class="csep-txt"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>Niterói — RJ</div>
+      <div class="csep-line"></div>
+    </div>
+    <div class="cards-grid" id="gn"></div>
+  </div>
+  <div id="sec-g" class="sec2">
+    <div class="cidade-sep">
+      <div class="csep-line"></div>
+      <div class="csep-txt"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>São Gonçalo — RJ</div>
+      <div class="csep-line"></div>
+    </div>
+    <div class="cards-grid" id="gg"></div>
+  </div>
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <img src="logo.png" alt="Medina Paes Imóveis"
+      onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 220 60%22><rect width=%22220%22 height=%2260%22 rx=%228%22 fill=%22%231B2E5E%22/><text x=%2212%22 y=%2224%22 font-family=%22Arial Black,sans-serif%22 font-weight=%22900%22 font-size=%2219%22 fill=%22%231E4DB7%22>M</text><text x=%2228%22 y=%2224%22 font-family=%22Arial Black,sans-serif%22 font-weight=%22900%22 font-size=%2219%22 fill=%22%23F5A800%22>P</text><text x=%2212%22 y=%2242%22 font-family=%22Arial,sans-serif%22 font-weight=%22800%22 font-size=%2213%22 fill=%22white%22>MEDINA PAES</text><text x=%2212%22 y=%2256%22 font-family=%22Arial,sans-serif%22 font-weight=%22500%22 font-size=%228%22 letter-spacing=%222%22 fill=%22%23F5A800%22>IMÓVEIS</text></svg>';">
+
+    <p style="font-size:13px;color:rgba(255,255,255,.5)">Especialistas em oportunidades da Caixa Econômica Federal — Niterói e São Gonçalo</p>
+    <p class="fav">⚠️ Dados estimados com base em fontes públicas (FipeZAP, Secovi-Rio, DataZAP) e têm caráter informativo. Valores de mercado, desconto, lucro e ROI são aproximações e não constituem garantia de retorno. Confirme todas as informações na Caixa Econômica Federal antes de qualquer decisão.</p>
+  </div>
+</footer>
+
+<!-- MODAL -->
+<div class="overlay hidden" id="overlay" onclick="fecharModal(event)">
+  <div class="modal" id="modal">
+    <div class="modal-hero">
+      <img id="m-img" src="" alt="">
+      <button class="modal-close" onclick="fecharModal(null,true)">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-top">
+        <div>
+          <div class="modal-tipo" id="m-tipo"></div>
+          <div class="modal-h1" id="m-h1"></div>
+          <div class="modal-cod" id="m-cod"></div>
+        </div>
+        <div id="m-badge"></div>
+      </div>
+      <div class="modal-prices" id="m-prices"></div>
+
+      <!-- tabs -->
+      <div class="modal-tabs">
+        <button class="tab on" onclick="abaModal('mercado',this)">Mercado</button>
+        <button class="tab" onclick="abaModal('localidade',this)">Localidade</button>
+        <button class="tab" onclick="abaModal('projetos',this)">Projetos Futuros</button>
+      </div>
+
+      <!-- ABA MERCADO -->
+      <div class="tab-pane on" id="tp-mercado">
+        <div class="stats-grid" id="m-stats"></div>
+        <div class="texto-box" id="m-texto"></div>
+      </div>
+
+      <!-- ABA LOCALIDADE -->
+      <div class="tab-pane" id="tp-localidade">
+        <a id="maps-link" href="#" target="_blank" class="maps-btn">
+          <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          Ver no Google Maps
+        </a>
+        <div class="chips" id="m-chips"></div>
+        <div class="texto-box" id="m-localinfo"></div>
+      </div>
+
+      <!-- ABA PROJETOS -->
+      <div class="tab-pane" id="tp-projetos">
+        <div id="m-projetos"></div>
+      </div>
+
+      <div class="modal-footer" id="m-btns"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+const WPP = "5521986517152";
+
+/* ─ DADOS DE MERCADO POR CIDADE ─ */
+const mercadoCidade = {
+  niteroi:{
+    m2venda:"R$ 7.730/m²",
+    m2aluguel:"R$ 34/m²",
+    valorizacao:"+6,99% (12 m.)",
+    rentabilidade:"~0,5–0,7% a.m.",
+    demanda:"Alta",
+    fonte:"FipeZAP + Secovi-Rio Mar/2025",
+    infoLocal:"Niterói conta com mais de 500 linhas de ônibus municipais e intermunicipais (MTO/NITTRANS), barcas para o Rio de Janeiro (Araribóia → Praça XV, ~20 min), ciclovias em expansão e fácil acesso à Ponte Rio-Niterói. IDH-M de 0,837 — um dos mais altos do estado.",
+    chips:["🚌 +500 linhas de ônibus","⛴ Barcas para o Rio (20 min)","🚲 Malha cicloviária em expansão","🏥 Hospital Universitário (UFF)","🎓 UFF + UERJ","🏖 Praia de Icaraí a 5 km do centro"],
+    projetos:[
+      {titulo:"VLT Niterói — R$ 450M (PAC)",desc:"Linha de 5 km ligando Barreto ao Centro com 10 estações. Obras previstas para 2026. Impacto direto na valorização de imóveis ao longo do corredor.",link:"https://niteroi.rj.gov.br/prefeito-e-ministro-da-fazenda-anunciam-financiamento-para-o-primeiro-vlt-de-niteroi/"},
+      {titulo:"Linha 3 do Metrô — R$ 28,8 bilhões",desc:"Prevê ligação da Praça XV até São Gonçalo, passando por Niterói. 31 novas estações e 44 km de trilhos. Projeto transformador para a região leste metropolitana.",link:"https://prefeitura.rio/cidade/prefeitura-participa-da-apresentacao-do-novo-projeto-de-expansao-metroviario/"},
+      {titulo:"Plano Niterói 2025–2050",desc:"Revitalização do Centro, expansão cicloviária conectando Av. Amaral Peixoto à Alameda São Boaventura, novos terminais integrados e 50 ônibus elétricos via PAC.",link:"https://niteroi.rj.gov.br/niteroi-lanca-plano-estrategico-ate-2050-com-foco-em-inovacao-inclusao-social-e-qualidade-de-vida/"},
+    ]
+  },
+  saogoncalo:{
+    m2venda:"~R$ 3.200/m²",
+    m2aluguel:"R$ 22/m²",
+    valorizacao:"Crescente 2025",
+    rentabilidade:"~0,7–0,9% a.m.",
+    demanda:"Alta (crescente)",
+    fonte:"DataZAP + QuintoAndar 2025",
+    infoLocal:"São Gonçalo é cortada pela BR-101 e conectada a Niterói e Rio por linhas intermunicipais diárias (terminais Alcântara, Guaxindiba, Tribobó). Fácil acesso à Ponte Rio-Niterói. É o 2º município mais populoso do RJ (~1,1M hab.), com forte polo comercial e crescente demanda habitacional.",
+    chips:["🚌 Linhas p/ Niterói e Rio","🛣 BR-101 e acesso à Ponte","🏪 Polo comercial de Alcântara","🏫 Rede de escolas estaduais","🏥 Hospital Estadual Alberto Torres","🌆 2º município mais populoso/RJ"],
+    projetos:[
+      {titulo:"Linha 3 do Metrô até Guaxindiba",desc:"A nova linha conectará São Gonçalo diretamente ao Rio de Janeiro, passando por Niterói. Transformação urbanística para toda a região leste metropolitana.",link:"https://prefeitura.rio/cidade/prefeitura-participa-da-apresentacao-do-novo-projeto-de-expansao-metroviario/"},
+      {titulo:"Terminal de Integração VLT em Neves (SG)",desc:"Terminal integrado ao VLT de Niterói em Neves (São Gonçalo), permitindo acesso ao Centro de Niterói e às barcas sem nova tarifa para passageiros gonçalenses.",link:"https://www.atribunarj.com.br/materia/vlt-de-niteroi-comecara-a-ser-construido-em-2026-afirma-rodrigo-neves/"},
+    ]
+  }
+};
+
+/* ─ DADOS DOS IMÓVEIS ─ */
+const imoveis = {
+  niteroi:[
+    {codigo:"8444419293320",tipo:"Apartamento",cidade:"niteroi",bairro:"Niterói",caixa:280000,mercado:380000,risco:"baixo",texto:"Imóvel em posição estratégica próximo ao centro, transporte público e acesso às barcas. Alto potencial de valorização para venda ou locação de renda — um dos destaques do portfólio."},
+    {codigo:"0000010207826",tipo:"Apartamento",cidade:"niteroi",bairro:"Niterói",caixa:195000,mercado:270000,risco:"baixo",texto:"Desconto expressivo em região consolidada com boa infraestrutura urbana. Perfil conservador com excelente relação risco-retorno para renda passiva."},
+    {codigo:"0000010207829",tipo:"Apartamento",cidade:"niteroi",bairro:"Niterói",caixa:210000,mercado:295000,risco:"baixo",texto:"Unidade próxima ao código anterior — viável estratégia multi-ativo. Liquidez elevada pela demanda regional consistente e proximidade ao eixo de barcas."},
+    {codigo:"1555518585837",tipo:"Apartamento",cidade:"niteroi",bairro:"Niterói",caixa:320000,mercado:450000,risco:"baixo",texto:"Maior potencial de lucro absoluto do portfólio em Niterói. Área nobre com alta demanda por locação por temporada e longo prazo."},
+    {codigo:"0000010171274",tipo:"Casa",cidade:"niteroi",bairro:"Niterói",caixa:175000,mercado:240000,risco:"medio",texto:"Casa com potencial de retrofit e valorização por acabamento. Verifique regularização documental na CEF antes de prosseguir."},
+    {codigo:"1444420915292",tipo:"Apartamento",cidade:"niteroi",bairro:"Niterói",caixa:260000,mercado:360000,risco:"baixo",texto:"Padrão médio-alto. Ideal para renda passiva com locação residencial de longo prazo. Área com valorização acima da média de Niterói."},
+    {codigo:"1444419445911",tipo:"Apartamento",cidade:"niteroi",bairro:"Niterói",caixa:230000,mercado:310000,risco:"baixo",texto:"Desconto atrativo. Rentabilidade de locação estimada entre 0,5% e 0,7% a.m. sobre o valor de mercado (ref. Secovi-Rio)."},
+    {codigo:"8444409347125",tipo:"Apartamento",cidade:"niteroi",bairro:"Niterói",caixa:155000,mercado:215000,risco:"medio",texto:"Menor ticket do portfólio em Niterói. Perfil de entrada para investidor iniciante. Inclua custo de reforma estimado no cálculo do ROI."},
+    {codigo:"1555527013638",tipo:"Apartamento",cidade:"niteroi",bairro:"Niterói",caixa:295000,mercado:410000,risco:"baixo",texto:"Bom desconto com localização premium. Valorização potencial acima da média municipal. Excelente para revenda após reforma leve."},
+    {codigo:"1444403164179",tipo:"Apartamento",cidade:"niteroi",bairro:"Niterói",caixa:185000,mercado:255000,risco:"medio",texto:"Desconto relevante. Recomenda-se vistoria presencial para avaliação do estado de conservação antes de formalizar proposta na CEF."},
+    {codigo:"8444409733890",tipo:"Apartamento",cidade:"niteroi",bairro:"Niterói",caixa:245000,mercado:340000,risco:"baixo",texto:"Sólida relação risco-retorno. Região com crescente interesse imobiliário e boa conectividade com o Rio via travessia aquaviária."}
+  ],
+  saogoncalo:[
+    {codigo:"8290500003892",tipo:"Apartamento",cidade:"saogoncalo",bairro:"São Gonçalo",caixa:120000,mercado:175000,risco:"baixo",texto:"Menor ticket de entrada do portfólio. São Gonçalo apresenta crescente demanda habitacional e é o 2º município mais populoso do RJ."},
+    {codigo:"8444422392856",tipo:"Apartamento",cidade:"saogoncalo",bairro:"São Gonçalo",caixa:145000,mercado:205000,risco:"baixo",texto:"Desconto expressivo em bairro com boa infraestrutura. Proximidade com polo comercial de Alcântara garante demanda de locação consistente."},
+    {codigo:"8444422862364",tipo:"Apartamento",cidade:"saogoncalo",bairro:"São Gonçalo",caixa:135000,mercado:190000,risco:"medio",texto:"Desconto acima de 28%. Confirme condições de ocupação e documentação na CEF. Potencial de reforma para valorização adicional."},
+    {codigo:"8444425826091",tipo:"Casa",cidade:"saogoncalo",bairro:"São Gonçalo",caixa:165000,mercado:235000,risco:"medio",texto:"Casa com área maior que a média do portfólio. Indicada para locação familiar de longo prazo ou revenda após regularização."},
+    {codigo:"8444424859557",tipo:"Apartamento",cidade:"saogoncalo",bairro:"São Gonçalo",caixa:130000,mercado:185000,risco:"baixo",texto:"ROI estimado competitivo. Infraestrutura estabelecida com boa proximidade a transportes para Niterói e Rio de Janeiro."},
+    {codigo:"1555530064248",tipo:"Apartamento",cidade:"saogoncalo",bairro:"São Gonçalo",caixa:155000,mercado:225000,risco:"baixo",texto:"Excelente desconto com alta demanda locatícia no entorno. Retorno de renda passiva consistente em região de forte crescimento."}
+  ]
+};
+
+/* ─ HELPERS ─ */
+const brl  = v=>new Intl.NumberFormat('pt-BR',{style:'currency',currency:'BRL',maximumFractionDigits:0}).format(v);
+const pct  = (a,b)=>(((b-a)/b)*100).toFixed(0);
+const roi  = (a,b)=>(((b-a)/a)*100).toFixed(0);
+const badgeCls = r=>r==='baixo'?'b-baixo':r==='medio'?'b-medio':'b-alto';
+const badgeLbl = r=>r==='baixo'?'🟢 Baixo Risco':r==='medio'?'🟡 Médio Risco':'🔴 Alto Risco';
+
+/* ─ GERAR URLs CAIXA com proxy CORS + fallbacks diretos ─ */
+function gerarImagensCaixa(codigo){
+  const base = `https://venda-imoveis.caixa.gov.br/fotos/F${codigo}`;
+  const sufixos = ['21','22','23','1',''];
+  const urls = [];
+  // 1) cache local (quando hospedado com as imagens baixadas)
+  urls.push(`imagens/${codigo}.jpg`);
+  // 2) via proxy allorigins (contorna CORS)
+  sufixos.forEach(s => {
+    const orig = encodeURIComponent(`${base}${s}.jpg`);
+    urls.push(`https://api.allorigins.win/raw?url=${orig}`);
+  });
+  // 3) direto (funciona quando hospedado no mesmo domínio ou sem restrição)
+  sufixos.forEach(s => urls.push(`${base}${s}.jpg`));
+  return urls;
+}
+
+/* ─ APLICAR IMAGEM COM FALLBACK AUTOMÁTICO ─ */
+function aplicarImagem(imgEl, codigo, onFail){
+  const urls = gerarImagensCaixa(codigo);
+  let idx = 0;
+  function tentar(){
+    if(idx >= urls.length){
+      // fallback final: placeholder elegante em SVG inline (não depende de arquivo externo)
+      imgEl.style.display = 'none';
+      const wrap = imgEl.parentNode;
+      if(wrap && !wrap.querySelector('.no-ph')){
+        const ph = document.createElement('div');
+        ph.className = 'no-ph';
+        ph.innerHTML = `
+          <svg viewBox="0 0 80 60" width="64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="80" height="60" rx="8" fill="#e2eaf5"/>
+            <rect x="14" y="10" width="52" height="40" rx="4" fill="#c8d5ea"/>
+            <circle cx="28" cy="24" r="6" fill="#a8bcd8"/>
+            <path d="M14 42 L30 28 L42 38 L54 24 L66 42 Z" fill="#b0c4de"/>
+          </svg>
+          <span>Foto não disponível</span>`;
+        wrap.appendChild(ph);
+        const sk = wrap.querySelector('.sk');
+        if(sk) sk.style.display = 'none';
+      }
+      onFail && onFail();
+      return;
+    }
+    imgEl.onerror = () => { idx++; tentar(); };
+    imgEl.onload  = () => {
+      imgEl.classList.add('loaded');
+      const sk = imgEl.parentNode && imgEl.parentNode.querySelector('.sk');
+      if(sk) sk.style.display = 'none';
+    };
+    imgEl.src = urls[idx];
+  }
+  tentar();
+}
+
+/* ─ ALIAS para compatibilidade com o modal ─ */
+function loadImg(imgEl, codigo, onFail){ aplicarImagem(imgEl, codigo, onFail); }
+
+/* ─ CRIAR CARD ─ */
+function mkCard(op){
+  const lucro=op.mercado-op.caixa, D=pct(op.caixa,op.mercado), R=roi(op.caixa,op.mercado);
+  const caixaUrl=`https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnOrigem=index&hdnimovel=${op.codigo}`;
+  const wppMsg=encodeURIComponent(`Olá! Vi o imóvel CEF código ${op.codigo} em ${op.bairro} no site da Medina Paes. Quero mais informações!`);
+  const wppUrl=`https://wa.me/${WPP}?text=${wppMsg}`;
+
+  const div=document.createElement('div');
+  div.className='card';
+  div.dataset.cidade=op.cidade; div.dataset.risco=op.risco; div.dataset.cod=op.codigo;
+
+  div.innerHTML=`
+    <div class="card-img">
+      <div class="sk"></div>
+      <img id="ci-${op.codigo}" alt="Imóvel ${op.codigo}" loading="lazy">
+      <div class="b-risco ${badgeCls(op.risco)}">${badgeLbl(op.risco)}</div>
+      <div class="b-desc">-${D}%</div>
+    </div>
+    <div class="card-body" onclick="abrirModal('${op.codigo}')">
+      <div class="card-loc"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>${op.bairro} · ${op.tipo}</div>
+      <div><div class="card-title">Oportunidade CEF</div><div class="card-cod">Cód. ${op.codigo}</div></div>
+      <div class="card-prices">
+        <div class="price-c"><div class="lbl">Valor Caixa</div><div class="val">${brl(op.caixa)}</div></div>
+        <div class="price-m"><div class="lbl">Mercado</div><div class="val">${brl(op.mercado)}</div></div>
+        <div class="price-l"><div class="lbl">Lucro est.</div><div class="val">+${brl(lucro)}</div></div>
+      </div>
+      <div class="roi-pill"><svg viewBox="0 0 24 24"><path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z"/></svg>ROI estimado: ${R}%</div>
+      <div class="card-texto">${op.texto}</div>
+    </div>
+    <div class="card-footer">
+      <button class="btn-sm btn-det" onclick="abrirModal('${op.codigo}')">+ Detalhes</button>
+      <a href="${caixaUrl}" target="_blank" class="btn-sm btn-ver" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Caixa</a>
+      <a href="${wppUrl}" target="_blank" class="btn-sm btn-int" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>Interesse</a>
+    </div>`;
+
+  const imgEl=div.querySelector(`#ci-${op.codigo}`);
+  loadImg(imgEl,op.codigo,()=>{
+    imgEl.style.display='none';
+    const ph=document.createElement('div');ph.className='no-ph';
+    ph.innerHTML=`<svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zm-8.5-5.5l-3 3.86L7 14l-3 4h16l-5-6.5z"/></svg><span>Sem foto disponível</span>`;
+    imgEl.parentNode.appendChild(ph);
+    const sk=imgEl.parentNode.querySelector('.sk');if(sk)sk.style.display='none';
+  });
+  return div;
+}
+
+/* ─ RENDER CARDS ─ */
+const gn=document.getElementById('gn'), gg=document.getElementById('gg');
+imoveis.niteroi.forEach(op=>gn.appendChild(mkCard(op)));
+imoveis.saogoncalo.forEach(op=>gg.appendChild(mkCard(op)));
+
+/* ─ FILTRO ─ */
+function fil(tipo,btn){
+  document.querySelectorAll('.pill').forEach(p=>p.classList.remove('on'));
+  btn.classList.add('on');
+  const all=document.querySelectorAll('.card'); let vis=0;
+  all.forEach(c=>{
+    const show=tipo==='todos'||tipo==='baixo'?c.dataset.risco==='baixo':c.dataset.cidade===tipo;
+    c.style.display=(tipo==='todos'||show)?'':'none';
+    if(tipo==='todos'||show)vis++;
+  });
+  document.getElementById('sec-n').style.display=[...gn.querySelectorAll('.card')].some(c=>c.style.display!=='none')?'':'none';
+  document.getElementById('sec-g').style.display=[...gg.querySelectorAll('.card')].some(c=>c.style.display!=='none')?'':'none';
+  document.getElementById('fc').textContent=vis+' imóve'+(vis===1?'l':'is');
+}
+
+/* ─ MODAL ─ */
+const todos=[...imoveis.niteroi,...imoveis.saogoncalo];
+
+function abrirModal(cod){
+  const op=todos.find(x=>x.codigo===cod); if(!op)return;
+  const mc=mercadoCidade[op.cidade];
+  const lucro=op.mercado-op.caixa, D=pct(op.caixa,op.mercado), R=roi(op.caixa,op.mercado);
+  const caixaUrl=`https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnOrigem=index&hdnimovel=${op.codigo}`;
+  const wppMsg=encodeURIComponent(`Olá! Vi o imóvel CEF código ${op.codigo} em ${op.bairro} e tenho interesse. Pode me passar mais informações?`);
+  const wppUrl=`https://wa.me/${WPP}?text=${wppMsg}`;
+  const mapsQ=encodeURIComponent(op.bairro+', '+op.bairro+', RJ');
+
+  // header
+  const mImg=document.getElementById('m-img');
+  mImg.src=''; mImg.className='';
+  loadImg(mImg,op.codigo,()=>{
+    mImg.style.display='none';
+    const ph=document.createElement('div');ph.style.cssText='width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#d0dcf0,#b8cceb)';
+    ph.innerHTML=`<svg viewBox="0 0 24 24" width="48" height="48" fill="#8fa3c8"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zm-8.5-5.5l-3 3.86L7 14l-3 4h16l-5-6.5z"/></svg>`;
+    document.querySelector('.modal-hero').appendChild(ph);
+  });
+
+  document.getElementById('m-tipo').textContent=op.tipo+' · '+op.bairro;
+  document.getElementById('m-h1').textContent='Oportunidade CEF — '+op.bairro;
+  document.getElementById('m-cod').textContent='Código Caixa: '+op.codigo;
+  document.getElementById('m-badge').innerHTML=`<div class="b-risco ${badgeCls(op.risco)}" style="position:static">${badgeLbl(op.risco)}</div>`;
+
+  document.getElementById('m-prices').innerHTML=`
+    <div class="mprice"><div class="lbl">Valor Caixa</div><div class="val">${brl(op.caixa)}</div></div>
+    <div class="mprice"><div class="lbl">Valor Mercado</div><div class="val">${brl(op.mercado)}</div></div>
+    <div class="mprice verde"><div class="lbl">Lucro Potencial</div><div class="val">+${brl(lucro)}</div></div>
+    <div class="mprice ouro"><div class="lbl">ROI Estimado</div><div class="val">${R}%</div></div>`;
+
+  // aba mercado
+  document.getElementById('m-stats').innerHTML=`
+    <div class="stat"><div class="lbl">m² venda (${op.bairro})</div><div class="val">${mc.m2venda}</div><div class="sub">Fonte: FipeZAP</div></div>
+    <div class="stat"><div class="lbl">Aluguel m²</div><div class="val">${mc.m2aluguel}</div><div class="sub">DataZAP / Secovi 2025</div></div>
+    <div class="stat ouro"><div class="lbl">Valorização</div><div class="val">${mc.valorizacao}</div></div>
+    <div class="stat"><div class="lbl">Rent. locação est.</div><div class="val">${mc.rentabilidade}</div></div>
+    <div class="stat"><div class="lbl">Demanda</div><div class="val">${mc.demanda}</div></div>
+    <div class="stat"><div class="lbl">Desconto s/ mercado</div><div class="val" style="color:var(--verde)">-${D}%</div></div>`;
+  document.getElementById('m-texto').textContent=op.texto;
+
+  // aba localidade
+  document.getElementById('maps-link').href=`https://www.google.com/maps/search/?api=1&query=${mapsQ}`;
+  document.getElementById('m-chips').innerHTML=mc.chips.map(c=>`<div class="chip"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>${c}</div>`).join('');
+  document.getElementById('m-localinfo').textContent=mc.infoLocal;
+
+  // aba projetos
+  document.getElementById('m-projetos').innerHTML=mc.projetos.map(p=>`
+    <div class="projeto-item">
+      <div class="proj-icon"><svg viewBox="0 0 24 24"><path d="M4 16c0 .88.39 1.67 1 2.22V20a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1h8v1a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1.78c.61-.55 1-1.34 1-2.22V6c0-3.5-3.58-4-8-4s-8 .5-8 4v10zm3.5 1a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm9 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zM4 11V9h16v2H4z"/></svg></div>
+      <div class="proj-txt"><div class="title">${p.titulo}</div><div class="desc">${p.desc} <a href="${p.link}" target="_blank">→ Fonte oficial</a></div></div>
+    </div>`).join('');
+
+  // footer do modal
+  document.getElementById('m-btns').innerHTML=`
+    <a href="${caixaUrl}" target="_blank" class="mf-btn mf-ver"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Ver na Caixa</a>
+    <a href="${wppUrl}" target="_blank" class="mf-btn mf-int"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>Tenho Interesse</a>`;
+
+  // reset tabs
+  abaModal('mercado',document.querySelector('.tab'));
+  document.getElementById('overlay').classList.remove('hidden');
+  document.body.style.overflow='hidden';
+}
+
+function fecharModal(e,force){
+  if(force||!e||e.target===document.getElementById('overlay')){
+    document.getElementById('overlay').classList.add('hidden');
+    document.body.style.overflow='';
+  }
+}
+function abaModal(tab,btn){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));
+  document.querySelectorAll('.tab-pane').forEach(p=>p.classList.remove('on'));
+  if(btn)btn.classList.add('on');
+  document.getElementById('tp-'+tab).classList.add('on');
+}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')fecharModal(null,true)});
+</script>
+</body>
+</html>
